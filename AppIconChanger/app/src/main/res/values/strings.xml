@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppIconChanger</string>
+
+    <string name="app_labael_cloudy">Cloudy</string>
+    <string name="app_labael_drizzle">Drizzle</string>
+    <string name="app_labael_haze">Haze</string>
+    <string name="app_labael_mostly_cloudy">Mostly Cloudy</string>
+    <string name="app_labael_slight_drizzle">Slight Drizzle</string>
+    <string name="app_labael_snow">Snow</string>
+    <string name="app_labael_sunny">Sunny</string>
+    <string name="app_labael_thunderstorms">Thunderstorms</string>
+</resources>
