@@ -1,7 +1,9 @@
-package com.passionvirus.firebasepush
+package com.passionvirus.sample.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.passionvirus.firebasepush.R
+import com.passionvirus.sample.R
 
 class MainActivity : AppCompatActivity() {
 

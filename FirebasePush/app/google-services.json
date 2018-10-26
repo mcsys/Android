@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1029416775468",
+    "firebase_url": "https://sample-2628a.firebaseio.com",
+    "project_id": "sample-2628a",
+    "storage_bucket": "sample-2628a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029416775468:android:ceeaa9c3add42d4d",
+        "android_client_info": {
+          "package_name": "com.passionvirus.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029416775468-g3sdpvo8bktaf78k4mud6ohbhdd812si.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyZ-zjvlpB0Xy2_bNwokm9j7eMPSHAh0s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
