@@ -3,13 +3,14 @@ package com.passionvirus.pvutils
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.annotation.NonNull
+import android.support.annotation.Nullable
 
 class AppPreferences {
     companion object {
+        private var mContext: Context? = null
         private var mPrefName: String = "APP_PREF_DEFAULT"
         private var mPrefs: SharedPreferences? = null
         private var mPrefMode: Int = Context.MODE_PRIVATE
-//        private var mPrefs: SharedPreferences? = null
     }
 
     constructor(@NonNull context: Context) {
@@ -20,19 +21,65 @@ class AppPreferences {
         mPrefs = context.getSharedPreferences(mPrefName, mPrefMode)
     }
 
+    /*
+    fun getPrefName(): String {
+        return mPrefName
+    }
+
     fun setPrefName(name: String) {
         mPrefName = name
     }
 
-    fun getPrefName(): String {
-        return mPrefName
+    fun getPrefMode(): Int {
+        return mPrefMode
     }
 
     fun setPrefMode(mode: Int) {
         mPrefMode = mode
     }
 
-    fun getPrefMode(): Int {
-        return mPrefMode
+    fun getPref() {
+        context.getSharedPreferences(mPrefName, mPrefMode)
+    }
+    */
+
+    fun getPrefBoolean(k: String, @Nullable default:Boolean = false): Boolean {
+        return mPrefs!!.getBoolean(k, default)
+    }
+
+    fun setPrefBoolean(k: String, v: Boolean) {
+        mPrefs!!.edit().putBoolean(k, v).apply()
+    }
+
+    fun getPrefInt(k: String, @Nullable default:Int = 0): Int {
+        return mPrefs!!.getInt(k, default)
+    }
+
+    fun setPrefInt(k: String, v: Int) {
+        mPrefs!!.edit().putInt(k, v).apply()
+    }
+
+    fun getPrefFloat(k: String, @Nullable default:Float = 0F): Float {
+        return mPrefs!!.getFloat(k, default)
+    }
+
+    fun setPrefFloat(k: String, v: Float) {
+        mPrefs!!.edit().putFloat(k, v).apply()
+    }
+
+    fun getPrefLong(k: String, @Nullable default:Long = 0): Long {
+        return mPrefs!!.getLong(k, default)
+    }
+
+    fun setPrefLong(k: String, v: Long) {
+        mPrefs!!.edit().putLong(k, v).apply()
+    }
+
+    fun getPrefString(k: String, @Nullable default:String = ""): String {
+        return mPrefs!!.getString(k, default)
+    }
+
+    fun setPrefString(k: String, v: String) {
+        mPrefs!!.edit().putString(k, v).apply()
     }
 }
