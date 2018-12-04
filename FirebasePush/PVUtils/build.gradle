@@ -22,6 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -29,22 +30,12 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
-    implementation "com.firebase:firebase-jobdispatcher:$rootProject.firebaseJobDispatcherVersion"
-
-    implementation "com.google.firebase:firebase-core:$rootProject.firebaseCoreVersion"
-    implementation "com.google.firebase:firebase-messaging:$rootProject.firebaseMessagingVersion"
-\
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
-
 }
-
-dependencies {
-    api project (':PVUtils')
-}
-
 repositories {
     mavenCentral()
 }

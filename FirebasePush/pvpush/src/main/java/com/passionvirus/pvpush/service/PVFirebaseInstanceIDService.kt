@@ -14,10 +14,12 @@ class PVFirebaseInstanceIDService : FirebaseMessagingService() {
     override fun onNewToken(s: String?) {
         super.onNewToken(s)
         Log.d(TAG, "NEW_TOKEN : " + s!!)
+        Log.d("TEST1234", "onNewToken")
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
+        Log.d("TEST1234", "onMessageReceived")
     }
 
 

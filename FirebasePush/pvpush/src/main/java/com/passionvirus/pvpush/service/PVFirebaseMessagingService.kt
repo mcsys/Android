@@ -23,8 +23,31 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
 
+        Log.d("TEST1234", "onMessageReceived")
         Log.d(TAG, "onMessageReceived")
 
+        Log.d(TAG, "From: ${remoteMessage?.from}")
+
+        // Check if message contains a data payload.
+        remoteMessage?.data?.isNotEmpty()?.let {
+            Log.d(TAG, "Message data payload: " + remoteMessage.data)
+
+            if (/* Check if data needs to be processed by long running job */ true) {
+                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
+                scheduleJob()
+            } else {
+                // Handle message within 10 seconds
+                handleNow()
+            }
+        }
+
+        // Check if message contains a notification payload.
+        remoteMessage?.notification?.let {
+            Log.d(TAG, "Message Notification Body: ${it.body}")
+        }
+
+        // Origin code
+        /*
         if (remoteMessage!!.data.size > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
@@ -44,10 +67,13 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage.notification != null) {
             sendNotification(remoteMessage.notification!!.body)
         }
+        */
 
     }
 
     private fun scheduleJob() {
+        Log.d("TEST1234", "scheduleJob")
+
         val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(this))
         val myJob = dispatcher.newJobBuilder()
                 .setService(PVFirebaseJobService::class.java)
@@ -60,10 +86,12 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun handleNow() {
         Log.d(TAG, "Short lived task is done.")
+        Log.d("TEST1234", "handleNow")
     }
 
     private fun sendNotification(messageBody: String?) {
-
+        Log.d("TEST1234", "sendNotification")
+/*
         val intent = Intent(this, MessageActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, intent,
@@ -89,7 +117,7 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
-
+*/
     }
 
     companion object {

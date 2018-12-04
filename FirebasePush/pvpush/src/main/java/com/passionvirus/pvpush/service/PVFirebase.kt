@@ -7,29 +7,81 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.support.annotation.NonNull
+import android.support.annotation.Nullable
 import android.support.v4.content.LocalBroadcastManager
 import android.text.TextUtils
 import android.util.Log
+import com.passionvirus.pvutils.AppPreferences
 import java.util.*
 
-object SSPush {
+object PVFirebase {
+
+    val PV_FIREBASE_INTENT_CLASS_NAME       = "PV_FIREBASE_INTENT_CLASS_NAME"
+    val PV_FIREBASE_APP_NAME                = "PV_FIREBASE_APP_NAME"
+    val PV_FIREBASE_ICON                    = "PV_FIREBASE_ICON"
+    val PV_FIREBASE_SMALL_ICON              = "PV_FIREBASE_SMALL_ICON"
+    val PV_FIREBASE_LARGE_ICON              = "PV_FIREBASE_LARGE_ICON"
+    val PV_FIREBASE_ICON_CIRCLE_COLOR       = "PV_FIREBASE_ICON_CIRCLE_COLOR"
+
+
+    lateinit var mContext: Context
+
+    fun setContext(c: Context) {
+        mContext = c
+    }
+
+    fun getIntentClass(): String {
+        return AppPreferences(mContext).getPrefString(PV_FIREBASE_INTENT_CLASS_NAME)
+    }
+
+    fun setIntentClass(@NonNull default: String) {
+        AppPreferences(mContext).setPrefString(PV_FIREBASE_INTENT_CLASS_NAME, default)
+    }
+
+    fun getAppName(): String {
+        return AppPreferences(mContext).getPrefString(PV_FIREBASE_APP_NAME)
+    }
+
+    fun setAppName(@NonNull default: String) {
+        AppPreferences(mContext).setPrefString(PV_FIREBASE_APP_NAME, default)
+    }
+
+    fun getIcon(): Int {
+        return AppPreferences(mContext).getPrefInt(PV_FIREBASE_ICON)
+    }
+
+    fun setIcon(@NonNull default: Int) {
+        AppPreferences(mContext).setPrefInt(PV_FIREBASE_ICON, default)
+    }
+
+    fun getSmallIcon(): Int {
+        return AppPreferences(mContext).getPrefInt(PV_FIREBASE_SMALL_ICON)
+    }
+
+    fun setSmallIcon(@NonNull default: Int) {
+        AppPreferences(mContext).setPrefInt(PV_FIREBASE_SMALL_ICON, default)
+    }
+
+    fun getLargeIcon(): Int {
+        return AppPreferences(mContext).getPrefInt(PV_FIREBASE_LARGE_ICON)
+    }
+
+    fun setLargeIcon(@NonNull default: Int) {
+        AppPreferences(mContext).setPrefInt(PV_FIREBASE_LARGE_ICON, default)
+    }
+
+    fun getIconCircleColor(): Int {
+        return AppPreferences(mContext).getPrefInt(PV_FIREBASE_ICON_CIRCLE_COLOR)
+    }
+
+    fun setIconCircleColor(@NonNull default: Int) {
+        AppPreferences(mContext).setPrefInt(PV_FIREBASE_ICON_CIRCLE_COLOR, default)
+    }
 
     /*
-    fun setIntentClass(c: Context, s: String) {
-        SSPushPref.setPref(c, SSPushPref.PREF_TARGETINTENT, s)
-    }
 
-    fun getIntentClass(c: Context): String {
-        return SSPushPref.getPref(c, SSPushPref.PREF_TARGETINTENT)
-    }
 
-    fun setAppName(c: Context, s: String) {
-        SSPushPref.setPref(c, SSPushPref.PREF_NOTICENTER_APPNAME, s)
-    }
-
-    fun getAppName(c: Context): String {
-        return SSPushPref.getPref(c, SSPushPref.PREF_NOTICENTER_APPNAME)
-    }
 
     fun getIconResVal(c: Context): Int {
         return SSPushPref.getPrefInt(c, SSPushPref.PREF_NOTICENTER_ICON, 0)
