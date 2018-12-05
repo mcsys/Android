@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.support.annotation.NonNull
 import android.support.annotation.Nullable
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v4.content.LocalBroadcastManager
 import android.text.TextUtils
 import android.util.Log
@@ -24,11 +25,21 @@ object PVFirebase {
     val PV_FIREBASE_LARGE_ICON              = "PV_FIREBASE_LARGE_ICON"
     val PV_FIREBASE_ICON_CIRCLE_COLOR       = "PV_FIREBASE_ICON_CIRCLE_COLOR"
 
+    val PV_FIREBASE_DEFAULT_CHANNER_ID      = "PV_FIREBASE_DEFAULT_CHANNER_ID"
+    val PV_FIREBASE_DEFAULT_CHANNER_NAME    = "PV_FIREBASE_DEFAULT_CHANNER_NAME"
+
 
     lateinit var mContext: Context
+    lateinit var notificationManager: NotificationManager
 
     fun setContext(c: Context) {
         mContext = c
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager = mContext.getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(NotificationChannel(PV_FIREBASE_DEFAULT_CHANNER_ID,
+                    PV_FIREBASE_DEFAULT_CHANNER_NAME, NotificationManager.IMPORTANCE_LOW))
+        }
     }
 
     fun getIntentClass(): String {
@@ -77,6 +88,10 @@ object PVFirebase {
 
     fun setIconCircleColor(@NonNull default: Int) {
         AppPreferences(mContext).setPrefInt(PV_FIREBASE_ICON_CIRCLE_COLOR, default)
+    }
+
+
+    fun updateNotification() {
     }
 
     /*

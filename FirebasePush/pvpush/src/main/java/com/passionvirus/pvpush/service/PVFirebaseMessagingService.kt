@@ -1,107 +1,79 @@
 package com.passionvirus.pvpush.service
 
-import android.app.NotificationManager
 import android.app.NotificationChannel
-import android.os.Build
-import android.content.Context.NOTIFICATION_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
-import android.media.RingtoneManager
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.support.design.widget.CoordinatorLayout.Behavior.setTag
+import android.media.RingtoneManager
+import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.util.Log
-import com.firebase.jobdispatcher.Job
-import com.firebase.jobdispatcher.GooglePlayDriver
 import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.google.firebase.messaging.RemoteMessage
+import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
-
+import com.google.firebase.messaging.RemoteMessage
 
 class PVFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-
-        Log.d("TEST1234", "onMessageReceived")
-        Log.d(TAG, "onMessageReceived")
-
         Log.d(TAG, "From: ${remoteMessage?.from}")
+        Log.d(TAG, "onMessageReceived")
 
         // Check if message contains a data payload.
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
             if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                scheduleJob()
+//                scheduleJob()
             } else {
-                // Handle message within 10 seconds
                 handleNow()
             }
         }
 
-        // Check if message contains a notification payload.
         remoteMessage?.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
         }
+    }
 
-        // Origin code
-        /*
-        if (remoteMessage!!.data.size > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.data)
+    override fun onNewToken(token: String?) {
+        Log.d(TAG, "Refreshed token: $token")
 
-            /*
-            if (true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                scheduleJob();
-            } else {
-                // Handle message within 10 seconds
-                handleNow();
-            }
-            */
-
-        }
-
-        // Check if message contains a notification payload.
-        if (remoteMessage.notification != null) {
-            sendNotification(remoteMessage.notification!!.body)
-        }
-        */
-
+        sendRegistrationToServer(token)
     }
 
     private fun scheduleJob() {
-        Log.d("TEST1234", "scheduleJob")
-
+        // Todo Something
+        /*
         val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(this))
         val myJob = dispatcher.newJobBuilder()
-                .setService(PVFirebaseJobService::class.java)
+                .setService(MyJobService::class.java)
                 .setTag("my-job-tag")
                 .build()
         dispatcher.schedule(myJob)
-
+        */
     }
-
 
     private fun handleNow() {
         Log.d(TAG, "Short lived task is done.")
-        Log.d("TEST1234", "handleNow")
     }
 
-    private fun sendNotification(messageBody: String?) {
-        Log.d("TEST1234", "sendNotification")
-/*
-        val intent = Intent(this, MessageActivity::class.java)
+    private fun sendRegistrationToServer(token: String?) {
+        // TODO: Implement this method to send token to your app server.
+    }
+
+    private fun sendNotification(messageBody: String) {
+        /*
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, intent,
+        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT)
 
-        val channelId = "채널ID"  // getString(R.string.default_notification_channel_id)
+        val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.googleg_standard_color_18)
-                .setContentTitle("FCM Message")
+                .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                .setContentTitle(getString(R.string.fcm_message))
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
@@ -109,6 +81,7 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId,
                     "Channel human readable title",
@@ -116,14 +89,11 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
-*/
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+        */
     }
 
     companion object {
-
-        private val TAG = PVFirebaseMessagingService::class.java!!.simpleName
-        private val REQUEST_CODE = 0
-        private val NOTIFICATION_ID = 0
+        private val TAG = PVFirebaseMessagingService::class.simpleName
     }
 }
