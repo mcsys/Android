@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+        <import type="java.util.List"/>
+        <import type="androidx.databinding.ObservableArrayList" />
+        <import type="com.passionvirus.rxandroidsample.adapter.RecyclerViewItem" />
+
+        <variable
+            name="item"
+            type="List&lt;RecyclerViewItem&gt;" />
+
+        <!-- Not Use DataBinding -->
+        <!--
+        <variable
+            name="item"
+            type="RecyclerViewItem" />
+        -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
-            app:item="@{itemList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:item="@{item}"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.passionvirus.rxandroidsample.adapter.RecyclerViewItem" />
+        <variable
+            name="item"
+            type="RecyclerViewItem" />
     </data>
 
     <LinearLayout
@@ -12,13 +14,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!--
+        android:src="@{item.image}"
+        -->
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             tools:scaleType="fitCenter"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@{item.image}" />
 
+        <!--
+        android:text="@{item.title}"
+        -->
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
@@ -26,6 +34,6 @@
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
             android:paddingStart="5dp"
-            android:text="Title" />
+            android:text="@{item.title}" />
     </LinearLayout>
 </layout>

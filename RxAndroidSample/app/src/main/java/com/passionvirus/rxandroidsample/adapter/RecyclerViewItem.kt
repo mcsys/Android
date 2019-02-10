@@ -1,4 +1,4 @@
-package com.passionvirus.rxandroidsample.ui
+package com.passionvirus.rxandroidsample.adapter
 
 import android.graphics.drawable.Drawable
 

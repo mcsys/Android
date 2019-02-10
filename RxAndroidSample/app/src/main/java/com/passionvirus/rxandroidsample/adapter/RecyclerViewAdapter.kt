@@ -3,23 +3,34 @@ package com.passionvirus.rxandroidsample.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.passionvirus.rxandroidsample.R
-import com.passionvirus.rxandroidsample.ui.RecyclerViewItem
+import com.passionvirus.rxandroidsample.databinding.RecyclerviewItemBinding
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     private val mItems = ArrayList<RecyclerViewItem>()
     private var mPublishSubject = PublishSubject.create<RecyclerViewItem>()
 
+    override fun getItemCount(): Int {
+        return mItems.size
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+        val binding = RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RecyclerViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
+        val item = mItems[position]
+        holder.bind(item)
+        holder.getClickObserver(item).subscribe(mPublishSubject)
+    }
+
+    // Not Use DataBinding
+    /*
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
         return RecyclerViewHolder(view)
-    }
-
-    override fun getItemCount(): Int {
-        return mItems.size
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
@@ -28,6 +39,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewHolder>() {
         holder.itemView.item_title.text = item.title
         holder.getClickObserver(item).subscribe(mPublishSubject)
     }
+    */
 
     fun updateItems(items : List<RecyclerViewItem>) {
         mItems.addAll(items)
