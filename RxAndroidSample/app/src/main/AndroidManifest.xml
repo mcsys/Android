@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity" >
+        <activity android:name=".ui.TimerTaskActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +24,7 @@
         <activity android:name=".ui.EventListenerActivity" />
         <activity android:name=".ui.RecyclerViewActivity" />
         <activity android:name=".ui.AsyncTaskActivity" />
+        <activity android:name=".ui.TimerTaskActivity" />
         -->
     </application>
 
