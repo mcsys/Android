@@ -60,7 +60,14 @@ dependencies {
     // lombok (annotation library)
 //    implementation 'org.projectlombok:lombok:1.16.6'
 
-
+    // retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    // retrofit2 - Gson converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    // retrofit2 - Rxjava2 adapter
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    // okhttp3 - HttpLoggingInterceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
