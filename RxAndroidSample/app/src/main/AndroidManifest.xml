@@ -33,6 +33,7 @@
         <activity android:name=".ui.BufferActivity" />
         <activity android:name=".ui.ThrottleFirstActivity" />
         <activity android:name=".ui.WindowActivity" />
+        <activity android:name=".ui.DebounceActivity" />
         -->
     </application>
 
