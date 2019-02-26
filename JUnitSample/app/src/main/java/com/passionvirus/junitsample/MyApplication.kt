@@ -1,6 +1,7 @@
 package com.passionvirus.junitsample
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
 
 class MyApplication : Application() {
@@ -15,5 +16,8 @@ class MyApplication : Application() {
 
         LeakCanary.install(this)
         */
+
+        // Steotho
+        Stetho.initializeWithDefaults(this)
     }
 }
