@@ -1,4 +1,4 @@
-package com.passionvirus.junitsample
+package com.passionvirus.productivesample
 
 class Calculator {
     companion object {

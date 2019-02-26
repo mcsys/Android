@@ -1,4 +1,4 @@
-package com.passionvirus.junitsample
+package com.passionvirus.productivesample
 
 import android.app.Activity
 import android.content.Intent

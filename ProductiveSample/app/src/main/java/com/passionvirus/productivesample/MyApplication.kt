@@ -1,4 +1,4 @@
-package com.passionvirus.junitsample
+package com.passionvirus.productivesample
 
 import android.app.Application
 import com.facebook.stetho.Stetho

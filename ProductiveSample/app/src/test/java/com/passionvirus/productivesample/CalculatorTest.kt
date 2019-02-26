@@ -1,4 +1,4 @@
-package com.passionvirus.junitsample
+package com.passionvirus.productivesample
 
 import org.junit.After
 import org.junit.Before
