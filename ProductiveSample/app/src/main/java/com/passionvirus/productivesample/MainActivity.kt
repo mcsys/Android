@@ -10,6 +10,11 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
@@ -48,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         */
 
         // Okhttp
+        /*
         val thread = Thread(Runnable {
             try {
                 val get = OkGet()
@@ -65,6 +71,29 @@ class MainActivity : AppCompatActivity() {
         })
 
         thread.start()
+        */
+
+        // Retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl(RestService.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RestService::class.java)
+        val call = service.getUser("mcsys")
+        call.enqueue(object: Callback<GithubUser> {
+            override fun onResponse(call: Call<GithubUser>, response: Response<GithubUser>) {
+                if(response.isSuccessful) {
+                    val user = response.body()
+                    Log.d(TAG, "login: ${user!!.login}")
+                }
+                Log.d(TAG, response.toString())
+            }
+
+            override fun onFailure(call: Call<GithubUser>, t: Throwable) {
+                Log.d(TAG, "onFailure")
+            }
+        })
     }
 
     fun onButtonClicked() {
