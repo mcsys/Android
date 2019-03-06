@@ -1,5 +1,6 @@
 package com.passionvirus.cleanlist.adapter
 
+import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
@@ -15,5 +16,10 @@ object BindingAdapters {
             adapter.notifyDataSetChanged()
             */
         }
+    }
+
+    @JvmStatic @BindingAdapter("enabled")
+    fun viewEnabled(view: View, status: Boolean) {
+        view.isEnabled = status
     }
 }
