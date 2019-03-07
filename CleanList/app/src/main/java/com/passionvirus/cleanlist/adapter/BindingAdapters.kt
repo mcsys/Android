@@ -18,7 +18,7 @@ object BindingAdapters {
         }
     }
 
-    @JvmStatic @BindingAdapter("enabled")
+    @JvmStatic @BindingAdapter("viewEnabled")
     fun viewEnabled(view: View, status: Boolean) {
         view.isEnabled = status
     }
