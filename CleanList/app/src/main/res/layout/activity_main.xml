@@ -8,6 +8,10 @@
         <import type="com.passionvirus.cleanlist.adapter.RecyclerViewItem" />
 
         <variable
+            name="vm"
+            type="com.passionvirus.cleanlist.viewmodel.MainViewModel" />
+
+        <variable
             name="item"
             type="List&lt;RecyclerViewItem&gt;" />
 
@@ -24,28 +28,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-        <!--
-        app:item="@{item}"
-        tools:listitem="@layout/main_item"
-        -->
-
-        <ImageButton
-            android:id="@+id/btn_prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/navigate_prev"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="@null"/>
-
         <ImageButton
             android:id="@+id/btn_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClickListener="@{() -> vm.getAbilityList()}"
             app:srcCompat="@mipmap/refresh"
+            app:viewVisible="@{vm.refreshVisible}"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +43,26 @@
             android:contentDescription="@null"/>
 
         <ImageButton
+            android:id="@+id/btn_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClickListener="@{() -> vm.requestPrev()}"
+            app:srcCompat="@mipmap/navigate_prev"
+            app:viewEnabled="@{vm.prevEnabled}"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@null"/>
+
+        <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClickListener="@{() -> vm.requestNext()}"
             app:srcCompat="@mipmap/navigate_next"
+            app:viewEnabled="@{vm.nextEnabled}"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_prev"

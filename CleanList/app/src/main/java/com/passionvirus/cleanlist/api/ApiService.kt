@@ -8,9 +8,9 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("ability")
-    abstract fun getPages() : Call<JsonObject>
+    abstract fun getAllAbility() : Call<JsonObject>
 
     @GET("ability/{page}")
-    abstract fun getDataByPage(@Path("page") page : Int) : Call<JsonObject>
+    abstract fun getAbility(@Path("page") page : Int) : Call<JsonObject>
 
 }
