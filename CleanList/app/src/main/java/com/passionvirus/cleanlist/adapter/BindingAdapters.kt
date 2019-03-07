@@ -18,6 +18,17 @@ object BindingAdapters {
         }
     }
 
+    @JvmStatic @BindingAdapter("viewVisible")
+    fun viewVisible(view: View, status: Boolean) {
+        view.visibility = if(status) {
+            View.VISIBLE
+        }
+        else {
+            View.INVISIBLE
+        }
+        view.isEnabled = status
+    }
+
     @JvmStatic @BindingAdapter("viewEnabled")
     fun viewEnabled(view: View, status: Boolean) {
         view.isEnabled = status
