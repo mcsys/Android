@@ -30,10 +30,10 @@
         -->
 
         <ImageButton
-            android:id="@+id/btn_before"
+            android:id="@+id/btn_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/navigate_before"
+            app:srcCompat="@mipmap/navigate_prev"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             app:srcCompat="@mipmap/navigate_next"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_before"
+            app:layout_constraintStart_toEndOf="@+id/btn_prev"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="@null"/>
@@ -60,7 +60,7 @@
             android:scrollbars="vertical"
             app:item="@{item}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/btn_before"/>
+            app:layout_constraintBottom_toTopOf="@+id/btn_prev"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
