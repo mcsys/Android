@@ -9,7 +9,7 @@ class RetrofitClient {
 
         @JvmStatic
         fun getClient(baseUrl: String): Retrofit {
-            if (::retrofit.isInitialized) {
+            if (!::retrofit.isInitialized) {
                 retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
