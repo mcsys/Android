@@ -4,16 +4,18 @@
         xmlns:tools="http://schemas.android.com/tools" >
 
     <data>
-        <import type="java.util.List" />
         <import type="com.passionvirus.cleanlist.adapter.AbilityListViewItem" />
 
         <variable
             name="vm"
             type="com.passionvirus.cleanlist.viewmodel.AbilityListViewModel" />
 
+        <!--
+         <import type="java.util.ArrayList" />
         <variable
             name="item"
-            type="List&lt;AbilityListViewItem&gt;" />
+            type="ArrayList&lt;AbilityListViewItem&gt;" />
+        -->
 
         <!-- Not Use DataBinding -->
         <!--
@@ -75,7 +77,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scrollbars="vertical"
-            app:item="@{item}"
+            android:divider="#000000"
+            android:dividerHeight="8dp"
+            tools:listitem="@layout/abilitylist_item"
+            app:abilityListItem="@{vm.items}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/btn_prev"/>
 

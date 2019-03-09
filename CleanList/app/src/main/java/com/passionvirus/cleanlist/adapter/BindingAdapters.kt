@@ -5,16 +5,13 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 object BindingAdapters {
-    @JvmStatic
-    @BindingAdapter("item")
-    fun bindingItem(recyclerView: RecyclerView, items: List<AbilityListViewItem>?) {
+    @JvmStatic @BindingAdapter("abilityListItem")
+    fun bindingAbilityListItem(recyclerView: RecyclerView, items: ArrayList<AbilityListViewItem>?) {
         val adapter = recyclerView.adapter as AbilityListViewAdapter
 
         items?.let {
-            /*
             adapter.updateItems(items)
             adapter.notifyDataSetChanged()
-            */
         }
     }
 

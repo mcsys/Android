@@ -1,5 +1,5 @@
 package com.passionvirus.cleanlist.adapter
 
-data class AbilityListViewItem(val title : String, val memo : String) {
+data class AbilityListViewItem(val name : String, val url : String) {
 
 }

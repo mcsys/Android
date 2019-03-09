@@ -1,9 +1,11 @@
 package com.passionvirus.cleanlist.viewmodel
 
 import android.util.Log
+import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.passionvirus.cleanlist.adapter.AbilityListViewItem
 import com.passionvirus.cleanlist.api.ApiUtils
 import com.passionvirus.cleanlist.api.entity.ApiEntity
 import retrofit2.Call
@@ -22,6 +24,7 @@ class AbilityListViewModel {
     var refreshVisible = ObservableBoolean(false)
     var prevEnabled = ObservableBoolean(false)
     var nextEnabled = ObservableBoolean(false)
+    var items = ObservableArrayList<AbilityListViewItem>()
 
     init {
         getAbilityList()
@@ -47,8 +50,10 @@ class AbilityListViewModel {
                         Log.d("TEST1234", "OK")
                         Log.d("TEST1234", response.body().toString())
                         val loginResult = gson.fromJson(response.body().toString(), ApiEntity.AbilityList::class.java)
-                        Log.d("TEST1234", "Count: ${loginResult.count}")
+
                         Log.d("TEST1234", "T: ${loginResult.results[0].name}")
+
+                        items.addAll(loginResult.results)
 
                         loginResult.previous?.let {
                             prevEnabled.set(true)
