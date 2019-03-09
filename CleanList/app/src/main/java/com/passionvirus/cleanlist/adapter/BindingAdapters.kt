@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 object BindingAdapters {
     @JvmStatic
     @BindingAdapter("item")
-    fun bindingItem(recyclerView: RecyclerView, items: List<RecyclerViewItem>?) {
-        val adapter = recyclerView.adapter as RecyclerViewAdapter
+    fun bindingItem(recyclerView: RecyclerView, items: List<AbilityListViewItem>?) {
+        val adapter = recyclerView.adapter as AbilityListViewAdapter
 
         items?.let {
             /*

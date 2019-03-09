@@ -2,12 +2,12 @@ package com.passionvirus.cleanlist.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.passionvirus.cleanlist.BR
-import com.passionvirus.cleanlist.databinding.MainItemBinding
+import com.passionvirus.cleanlist.databinding.AbilitylistItemBinding
 
-class RecyclerViewHolder(val binding: MainItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class AbilityListViewHolder(private val binding: AbilitylistItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(item : RecyclerViewItem) {
+    fun bind(item : AbilityListViewItem) {
         binding.setVariable(BR.item, item)
     }
 

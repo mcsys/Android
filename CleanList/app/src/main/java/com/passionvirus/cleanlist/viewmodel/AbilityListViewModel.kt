@@ -11,8 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-//class MainViewModel : BaseObservable() {
-class MainViewModel {
+class AbilityListViewModel {
     companion object {
         private const val RETRY_COUNT = 3
         private var tryCount = 1

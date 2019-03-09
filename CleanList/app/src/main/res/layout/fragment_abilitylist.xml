@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <import type="java.util.List" />
+        <import type="com.passionvirus.cleanlist.adapter.AbilityListViewItem" />
+
+        <variable
+            name="vm"
+            type="com.passionvirus.cleanlist.viewmodel.AbilityListViewModel" />
+
+        <variable
+            name="item"
+            type="List&lt;AbilityListViewItem&gt;" />
+
+        <!-- Not Use DataBinding -->
+        <!--
+        <variable
+            name="item"
+            type="RecyclerViewItem" />
+        -->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
+
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClickListener="@{() -> vm.getAbilityList()}"
+            app:srcCompat="@mipmap/refresh"
+            app:viewVisible="@{vm.refreshVisible}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@null"/>
+
+        <ImageButton
+            android:id="@+id/btn_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClickListener="@{() -> vm.requestPrev()}"
+            app:srcCompat="@mipmap/navigate_prev"
+            app:viewEnabled="@{vm.prevEnabled}"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@null"/>
+
+        <ImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClickListener="@{() -> vm.requestNext()}"
+            app:srcCompat="@mipmap/navigate_next"
+            app:viewEnabled="@{vm.nextEnabled}"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_prev"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@null"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            app:item="@{item}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btn_prev"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
