@@ -85,4 +85,5 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_prev"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    
 </layout>
