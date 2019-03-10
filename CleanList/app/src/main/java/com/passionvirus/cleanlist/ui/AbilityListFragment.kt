@@ -1,6 +1,7 @@
 package com.passionvirus.cleanlist.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.passionvirus.cleanlist.viewmodel.AbilityListViewModel
 
 class AbilityListFragment : Fragment() {
     lateinit var binding : FragmentAbilitylistBinding
+    val adapter = AbilityListViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +23,11 @@ class AbilityListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_abilitylist, container, false)
-        binding.recyclerView.adapter = AbilityListViewAdapter()
         binding.vm = AbilityListViewModel()
+        binding.recyclerView.adapter = adapter
+        adapter.getItemPublishSubject().subscribe{
+                s -> Log.d(AbilityListFragment::class.java.simpleName, "Load: s.url")
+        }
 
         return binding.root
     }
@@ -34,5 +39,4 @@ class AbilityListFragment : Fragment() {
     override fun onPause() {
         super.onPause()
     }
-
 }

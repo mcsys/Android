@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.passionvirus.cleanlist.databinding.AbilitylistItemBinding
+import io.reactivex.subjects.PublishSubject
 
 class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     private val mItems = ArrayList<AbilityListViewItem>()
+    private var mPublishSubject = PublishSubject.create<AbilityListViewItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbilityListViewHolder {
         val binding = AbilitylistItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,9 +22,14 @@ class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     override fun onBindViewHolder(holder: AbilityListViewHolder, position: Int) {
         val item = mItems[position]
         holder.bind(item)
+        holder.getClickObserver(item).subscribe(mPublishSubject)
     }
 
     fun updateItems(items: ArrayList<AbilityListViewItem>) {
         mItems.addAll(items)
+    }
+
+    fun getItemPublishSubject() : PublishSubject<AbilityListViewItem> {
+        return mPublishSubject
     }
 }
