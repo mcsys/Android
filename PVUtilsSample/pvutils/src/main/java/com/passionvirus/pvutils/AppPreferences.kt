@@ -19,6 +19,8 @@ class AppPreferences {
 
     constructor(@NonNull context: Context, @NonNull prefName: String, @NonNull prefMode: Int) {
         mContext = context
+        mPrefName = prefName
+        mPrefMode = prefMode
         mPrefs = mContext.getSharedPreferences(mPrefName, mPrefMode)
     }
 
@@ -77,7 +79,7 @@ class AppPreferences {
     }
 
     fun getPrefString(k: String, @Nullable default:String = ""): String {
-        return mPrefs.getString(k, default)
+        return mPrefs.getString(k, default) ?: default
     }
 
     fun setPrefString(k: String, v: String) {
