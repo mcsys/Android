@@ -32,7 +32,6 @@ class AbilityListViewModel {
 
     fun getAbilityList() {
         getAbilityList(abilityListUrl)
-
     }
 
     fun getAbilityList(url : String) {
@@ -79,29 +78,6 @@ class AbilityListViewModel {
             tryCount = 1
             refreshVisible.set(true)
         }
-    }
-
-
-    fun getAbility(page : Int) {
-        ApiUtils.getSOService().getAbility(page).enqueue(object : Callback<JsonObject> {
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                getAbility(page)
-                tryCount++
-            }
-
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    Log.d("TEST1234", response.body().toString())
-
-//                    val loginResult = gson.fromJson(response.body().toString(), AbilityList::class.java)
-
-                }
-                else {
-                    getAbility(page)
-                    tryCount++
-                }
-            }
-        })
     }
 
     fun requestPrev() {
