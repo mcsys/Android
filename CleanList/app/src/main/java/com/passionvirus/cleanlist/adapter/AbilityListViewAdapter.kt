@@ -26,6 +26,8 @@ class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     }
 
     fun updateItems(items: ArrayList<AbilityListViewItem>) {
+        mItems.takeIf { it.size > 0 }
+            .run { mItems.clear() }
         mItems.addAll(items)
     }
 

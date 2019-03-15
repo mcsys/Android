@@ -25,6 +25,8 @@ class AbilityListViewModel {
     var prevEnabled = ObservableBoolean(false)
     var nextEnabled = ObservableBoolean(false)
     var items = ObservableArrayList<AbilityListViewItem>()
+    var prevUrl = ""
+    var nextUrl = ""
 
     init {
         getAbilityList()
@@ -52,17 +54,25 @@ class AbilityListViewModel {
 
                         Log.d("TEST1234", "T: ${loginResult.results[0].name}")
 
+                        items.takeIf { it.size > 0 }
+                            .run {
+                                items.clear()
+                            }
                         items.addAll(loginResult.results)
 
                         loginResult.previous?.let {
+                            prevUrl = loginResult.previous
                             prevEnabled.set(true)
                         } ?: run {
+                            prevUrl = ""
                             prevEnabled.set(false)
                         }
 
                         loginResult.next?.let {
+                            nextUrl = loginResult.next
                             nextEnabled.set(true)
                         } ?: run {
+                            nextUrl = ""
                             nextEnabled.set(false)
                         }
                     }
@@ -72,7 +82,6 @@ class AbilityListViewModel {
                     }
                 }
             })
-
         }
         else {
             tryCount = 1
@@ -81,15 +90,23 @@ class AbilityListViewModel {
     }
 
     fun requestPrev() {
-        Log.d("TEST1234", "requestPrev")
-//        abilityListUrl = url
-//        getAbilityList(abilityListUrl)
+        prevUrl.takeIf { it.isNotEmpty() }
+            .run {
+                tryCount = 1
+                prevEnabled.set(false)
+                nextEnabled.set(false)
+                getAbilityList(prevUrl)
+            }
     }
 
     fun requestNext() {
-        Log.d("TEST1234", "requestNext")
-//        abilityListUrl = url
-//        getAbilityList(abilityListUrl)
+        nextUrl.takeIf { it.isNotEmpty() }
+            .run {
+                tryCount = 1
+                prevEnabled.set(false)
+                nextEnabled.set(false)
+                getAbilityList(nextUrl)
+            }
     }
 
 }
