@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 object BindingAdapters {
     @JvmStatic @BindingAdapter("abilityListItem")
-    fun bindingAbilityListItem(recyclerView: RecyclerView, items: ArrayList<AbilityListViewItem>?) {
+    fun bindingAbilityListItem(recyclerView: RecyclerView, items: ArrayList<AbilityListViewItem>) {
         val adapter = recyclerView.adapter as AbilityListViewAdapter
 
-        items?.let {
+        items.let {
             adapter.updateItems(items)
             adapter.notifyDataSetChanged()
         }
