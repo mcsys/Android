@@ -13,7 +13,11 @@ import com.passionvirus.cleanlist.databinding.FragmentAbilitylistBinding
 import com.passionvirus.cleanlist.viewmodel.AbilityListViewModel
 
 
+
+
 class AbilityListFragment : Fragment() {
+    val TAG = AbilityListFragment::class.java.simpleName
+
     lateinit var binding : FragmentAbilitylistBinding
     val adapter = AbilityListViewAdapter()
 
@@ -26,10 +30,14 @@ class AbilityListFragment : Fragment() {
         binding.vm = AbilityListViewModel()
         binding.recyclerView.adapter = adapter
         adapter.getItemPublishSubject().subscribe{
-                s -> Log.d(AbilityListFragment::class.java.simpleName, "Load: s.url")
+                s -> moveAbility(s.name, s.url)
         }
 
         return binding.root
+    }
+
+    private fun moveAbility(name : String, url : String) {
+        (activity as MainActivity).moveAbility(name, url)
     }
 
     override fun onResume() {
