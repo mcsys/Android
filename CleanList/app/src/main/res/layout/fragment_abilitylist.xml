@@ -82,7 +82,8 @@
             tools:listitem="@layout/abilitylist_item"
             app:abilityListItem="@{vm.items}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/btn_prev"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_prev" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     
