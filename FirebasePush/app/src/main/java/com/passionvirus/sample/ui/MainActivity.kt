@@ -1,16 +1,12 @@
 package com.passionvirus.sample.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.passionvirus.sample.R
-import android.widget.Toast
-import com.google.android.gms.tasks.Task
-import android.support.annotation.NonNull
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.google.android.gms.tasks.OnCompleteListener
+import android.widget.Toast
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
-
+import com.passionvirus.sample.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +14,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (intent.extras != null) {
+            for (key in intent.extras!!.keySet()) {
+                val value = intent.extras!!.get(key)
+                Log.d("MainActivity: ", "Key: $key Value: $value")
+            }
+        }
 
         FirebaseMessaging.getInstance().subscribeToTopic("test")
                 .addOnCompleteListener { task ->
@@ -31,7 +34,10 @@ class MainActivity : AppCompatActivity() {
         // [END subscribe_topics]
 
 
-        Log.d("TEST1234", "T: "+ FirebaseInstanceId.getInstance().token);
+        // Token
+        // dcRN6DUpjqU:APA91bHAubS75O_IecB7beHCxygjdpfWRVia26KVXQ_hGxt4AjM0hNXvRzOgQ4jKs7wzPWnONDJ2pYSsKCR7jxP1JPE5EeidjiJKwXCkd1JOoLAdyBUZH7hciYiWhz2oUCY9bmHYzNuB
+        // { "data": { "image": "https://static.pexels.com/photos/4825/red-love-romantic-flowers.jpg", "message": "Firebase Push Message Using API" "AnotherActivity": "True" }, "to" : "device id Or Device token" }
+        Log.d("TEST1234", "T: "+ FirebaseInstanceId.getInstance().token)
 
 
         /*

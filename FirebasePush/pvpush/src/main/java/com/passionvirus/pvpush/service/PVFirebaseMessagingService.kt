@@ -1,16 +1,6 @@
 package com.passionvirus.pvpush.service
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
-import android.os.Build
-import android.support.v4.app.NotificationCompat
 import android.util.Log
-import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -19,10 +9,12 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         Log.d(TAG, "From: ${remoteMessage?.from}")
         Log.d(TAG, "onMessageReceived")
+        Log.d("TEST1234", "From: ${remoteMessage?.from}")
+        Log.d("TEST1234", "onMessageReceived")
 
         // Check if message contains a data payload.
         remoteMessage?.data?.isNotEmpty()?.let {
-            Log.d(TAG, "Message data payload: " + remoteMessage.data)
+            Log.d("TEST1234", "Message data payload: " + remoteMessage.data)
 
             if (/* Check if data needs to be processed by long running job */ true) {
 //                scheduleJob()
@@ -32,18 +24,18 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         remoteMessage?.notification?.let {
-            Log.d(TAG, "Message Notification Body: ${it.body}")
+            Log.d("TEST1234", "Message Notification Body: ${it.body}")
         }
     }
 
     override fun onNewToken(token: String?) {
-        Log.d(TAG, "Refreshed token: $token")
+        Log.d("TEST1234", "Refreshed token: $token")
 
         sendRegistrationToServer(token)
     }
 
     private fun scheduleJob() {
-        // Todo Something
+        // Something
         /*
         val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(this))
         val myJob = dispatcher.newJobBuilder()
@@ -59,7 +51,7 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendRegistrationToServer(token: String?) {
-        // TODO: Implement this method to send token to your app server.
+        // Implement this method to send token to your app server.
     }
 
     private fun sendNotification(messageBody: String) {
@@ -94,6 +86,7 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     companion object {
-        private val TAG = PVFirebaseMessagingService::class.simpleName
+//        private val TAG = PVFirebaseMessagingService::class.simpleName
+        private val TAG = "PVFMS"
     }
 }

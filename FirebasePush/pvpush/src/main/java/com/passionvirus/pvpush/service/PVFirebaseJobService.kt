@@ -6,7 +6,7 @@ import com.firebase.jobdispatcher.JobService
 class PVFirebaseJobService : JobService() {
 
     override fun onStartJob(jobParameters: JobParameters): Boolean {
-        // TODO(developer): add long running task here.
+        // add long running task here.
         return false
     }
 
@@ -15,7 +15,8 @@ class PVFirebaseJobService : JobService() {
     }
 
     companion object {
-        private val TAG = PVFirebaseJobService::class.simpleName
+//        private val TAG = PVFirebaseJobService::class.simpleName
+        private val TAG = "PVFirebaseJobService"
     }
 
 
