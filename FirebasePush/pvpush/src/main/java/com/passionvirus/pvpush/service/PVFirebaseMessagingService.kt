@@ -8,7 +8,7 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         Log.d(TAG, "From: ${remoteMessage?.from}")
-        Log.d(TAG, "onMessageReceived")
+        Log.d(TAG, "onMessageReceived :: PVFirebaseMessagingService")
         Log.d("TEST1234", "From: ${remoteMessage?.from}")
         Log.d("TEST1234", "onMessageReceived")
 
@@ -55,6 +55,7 @@ class PVFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(messageBody: String) {
+        Log.d("TEST1234", "sendNotification")
         /*
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

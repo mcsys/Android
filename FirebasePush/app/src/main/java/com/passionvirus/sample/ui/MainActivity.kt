@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
             String channelId  = getString(R.string.default_notification_channel_id);
             String channelName = getString(R.string.default_notification_channel_name);
             NotificationManager notificationManager =
-                    getSystemService(NotificationManager.class);
+                    getSystemService(NotificationManager.class)
             notificationManager.createNotificationChannel(new NotificationChannel(channelId,
-                    channelName, NotificationManager.IMPORTANCE_LOW));
+                    channelName, NotificationManager.IMPORTANCE_LOW))
         }
         // If a notification message is tapped, any data accompanying the notification
         // message is available in the intent extras. In this sample the launcher
