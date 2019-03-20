@@ -7,19 +7,19 @@ import android.support.annotation.Nullable
 
 class AppPreferences {
     companion object {
-        private lateinit var mContext: Context
-        private lateinit var mPrefs: SharedPreferences
-        private var mPrefName: String = "APP_PREF_DEFAULT"
-        private var mPrefMode: Int = Context.MODE_PRIVATE
+        private lateinit var context : Context
+        private lateinit var prefs : SharedPreferences
+        private var prefName : String = "APP_PREF_DEFAULT"
+        private var prefMode : Int = Context.MODE_PRIVATE"
     }
 
-    constructor(@NonNull context: Context) {
-        AppPreferences(context, mPrefName, mPrefMode)
+    constructor(@NonNull context : Context) {
+        AppPreferences(context, prefName, prefMode)
     }
 
-    constructor(@NonNull context: Context, @NonNull prefName: String, @NonNull prefMode: Int) {
-        mContext = context
-        mPrefs = mContext.getSharedPreferences(mPrefName, mPrefMode)
+    constructor(@NonNull c : Context, @NonNull prefName : String, @NonNull prefMode : Int) {
+        context = c
+        prefs = context.getSharedPreferences(prefName, prefMode)
     }
 
     /*
@@ -44,43 +44,43 @@ class AppPreferences {
     }
     */
 
-    fun getPrefBoolean(k: String, @Nullable default:Boolean = false): Boolean {
-        return mPrefs.getBoolean(k, default)
+    fun getPrefBoolean(k : String, @Nullable default : Boolean = false) : Boolean {
+        return prefs.getBoolean(k, default)
     }
 
-    fun setPrefBoolean(k: String, v: Boolean) {
-        mPrefs.edit().putBoolean(k, v).apply()
+    fun setPrefBoolean(k : String, v : Boolean) {
+        prefs.edit().putBoolean(k, v).apply()
     }
 
-    fun getPrefInt(k: String, @Nullable default:Int = 0): Int {
-        return mPrefs.getInt(k, default)
+    fun getPrefInt(k : String, @Nullable default : Int = 0) : Int {
+        return prefs.getInt(k, default)
     }
 
-    fun setPrefInt(k: String, v: Int) {
-        mPrefs.edit().putInt(k, v).apply()
+    fun setPrefInt(k : String, v : Int) {
+        prefs.edit().putInt(k, v).apply()
     }
 
-    fun getPrefFloat(k: String, @Nullable default:Float = 0F): Float {
-        return mPrefs.getFloat(k, default)
+    fun getPrefFloat(k : String, @Nullable default : Float = 0F) : Float {
+        return prefs.getFloat(k, default)
     }
 
-    fun setPrefFloat(k: String, v: Float) {
-        mPrefs.edit().putFloat(k, v).apply()
+    fun setPrefFloat(k : String, v : Float) {
+        prefs.edit().putFloat(k, v).apply()
     }
 
-    fun getPrefLong(k: String, @Nullable default:Long = 0): Long {
-        return mPrefs.getLong(k, default)
+    fun getPrefLong(k : String, @Nullable default : Long = 0) : Long {
+        return prefs.getLong(k, default)
     }
 
-    fun setPrefLong(k: String, v: Long) {
-        mPrefs.edit().putLong(k, v).apply()
+    fun setPrefLong(k : String, v : Long) {
+        prefs.edit().putLong(k, v).apply()
     }
 
-    fun getPrefString(k: String, @Nullable default:String = ""): String {
-        return mPrefs.getString(k, default)
+    fun getPrefString(k : String, @Nullable default : String = "") : String {
+        return prefs.getString(k, default)
     }
 
-    fun setPrefString(k: String, v: String) {
-        mPrefs.edit().putString(k, v).apply()
+    fun setPrefString(k : String, v : String) {
+        prefs.edit().putString(k, v).apply()
     }
 }
