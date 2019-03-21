@@ -29,13 +29,26 @@ class LocaleUtils {
         fun getLocalCountryCode() : String {
             return context?.let {
                 AppPreferences(it).getPrefString(LOCAL_COOUNTRY_CODE, getCoutryCode())
-            } ?: ""
+            } ?: getCoutryCode()
         }
 
-        fun setLocalCountryCode(lang : String) {
+        fun setLocalCountryCode(country : String) {
             context?.let {
-                AppPreferences(it).setPrefString(LOCAL_COOUNTRY_CODE, getCoutryCode())
+                AppPreferences(it).setPrefString(LOCAL_COOUNTRY_CODE, country)
             }
+        }
+
+        fun getLanguage() : String {
+            val language = context?.let {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    it.resources.configuration.locales.get(0).language
+                } else {
+                    it.resources.configuration.locale.language
+                }
+            } ?: ""
+
+            return language
         }
     }
 }
