@@ -11,6 +11,9 @@ import com.passionvirus.cleanlist.api.entity.ApiEntity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import io.reactivex.schedulers.Schedulers
+
+
 
 
 class AbilityListViewModel {
@@ -106,6 +109,16 @@ class AbilityListViewModel {
                 prevEnabled.set(false)
                 nextEnabled.set(false)
                 getAbilityList(nextUrl)
+
+//                https://medium.com/mindorks/rxandroid-retrofit-2fff4f89fa85
+//                https://tiii.tistory.com/11
+//                https://nittaku.tistory.com/179
+                // Temporary Add - for test
+                ApiUtils.getSOService().getAbilityList(nextUrl)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe({ it -> Log.d("TEST", "1234")})
+
             }
     }
 
