@@ -6,8 +6,8 @@ import android.support.annotation.NonNull
 import android.support.annotation.Nullable
 
 class AppPreferences {
+
     companion object {
-        private lateinit var context : Context
         private lateinit var prefs : SharedPreferences
         private var prefName : String = "APP_PREF_DEFAULT"
         private var prefMode : Int = Context.MODE_PRIVATE"
@@ -21,6 +21,8 @@ class AppPreferences {
         context = c
         prefs = context.getSharedPreferences(prefName, prefMode)
     }
+
+    lateinit var context : Context
 
     /*
     fun getPrefName(): String {
@@ -77,7 +79,7 @@ class AppPreferences {
     }
 
     fun getPrefString(k : String, @Nullable default : String = "") : String {
-        return prefs.getString(k, default)
+        return prefs.getString(k, default) ?: default
     }
 
     fun setPrefString(k : String, v : String) {
