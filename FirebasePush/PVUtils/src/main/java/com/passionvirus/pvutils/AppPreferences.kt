@@ -10,7 +10,7 @@ class AppPreferences {
     companion object {
         private lateinit var prefs : SharedPreferences
         private var prefName : String = "APP_PREF_DEFAULT"
-        private var prefMode : Int = Context.MODE_PRIVATE"
+        private var prefMode : Int = Context.MODE_PRIVATE
     }
 
     constructor(@NonNull context : Context) {
