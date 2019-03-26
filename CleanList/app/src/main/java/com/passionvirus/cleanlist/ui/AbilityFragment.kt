@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.passionvirus.cleanlist.R
+import com.passionvirus.cleanlist.api.Ability
 import com.passionvirus.cleanlist.databinding.FragmentAbilityBinding
 import com.passionvirus.cleanlist.viewmodel.AbilityViewModel
+
 
 class AbilityFragment : Fragment() {
     val TAG = AbilityFragment::class.java.simpleName
@@ -19,8 +21,8 @@ class AbilityFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        name = savedInstanceState?.getString("name") ?: ""
-        url = savedInstanceState?.getString("url") ?: ""
+        name = arguments?.getParcelable<Ability>("ability")?.name ?: ""
+        url = arguments?.getParcelable<Ability>("ability")?.url ?: ""
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
