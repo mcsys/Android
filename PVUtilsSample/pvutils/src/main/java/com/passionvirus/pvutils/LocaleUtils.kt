@@ -14,7 +14,7 @@ class LocaleUtils {
         }
 
         fun getCoutryCode() : String {
-            val countryCode = context?.let {
+            return context?.let {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     it.resources.configuration.locales.get(0).country
@@ -22,8 +22,6 @@ class LocaleUtils {
                     it.resources.configuration.locale.country
                 }
             } ?: ""
-
-            return countryCode
         }
 
         fun getLocalCountryCode() : String {
@@ -39,16 +37,13 @@ class LocaleUtils {
         }
 
         fun getLanguage() : String {
-            val language = context?.let {
-
+            return context?.let {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     it.resources.configuration.locales.get(0).language
                 } else {
                     it.resources.configuration.locale.language
                 }
             } ?: ""
-
-            return language
         }
     }
 }
