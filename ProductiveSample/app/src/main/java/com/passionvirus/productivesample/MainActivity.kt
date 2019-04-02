@@ -2,6 +2,7 @@ package com.passionvirus.productivesample
 
 import android.app.Activity
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -19,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
 
+    private val receiver = CustomReceiver()
     companion object {
         lateinit var mAcitivity : Activity
     }
@@ -96,8 +98,37 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun registerReceiver() {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(Intent.ACTION_BATTERY_LOW)
+        intentFilter.addAction(CUSTOM_ACTION)
+        registerReceiver(receiver, intentFilter)
+    }
+
+    private fun unregisterReceiver() {
+        unregisterReceiver(receiver)
+    }
+
     fun onButtonClicked() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
+    fun onButtonClicked2() {
+        val intent = Intent(CUSTOM_ACTION)
+        sendBroadcast(intent)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver()
+    }
+
+
 }
