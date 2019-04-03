@@ -10,76 +10,76 @@ class TimeUtils {
         private const val DEFAULT_TIMEZONE_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         private const val DEFAULT_TIMEZONE = "GMT"
 
-        lateinit var dateFormat : String
-        lateinit var dateLocale : Locale
-        lateinit var dateTimezone : TimeZone
+        lateinit var dateFormat: String
+        lateinit var dateLocale: Locale
+        lateinit var dateTimezone: TimeZone
         val calendar = Calendar.getInstance()
 
-        fun getDateTimeInMillis() : Long {
+        fun getDateTimeInMillis(): Long {
             return Calendar.getInstance().timeInMillis
         }
 
-        fun getCustomDateTimeInMillis() : Long {
+        fun getCustomDateTimeInMillis(): Long {
             return calendar.timeInMillis
         }
 
-        fun setCalendarYear(year : Int)  {
+        fun setCalendarYear(year: Int) {
             calendar.set(Calendar.YEAR, year)
         }
 
-        fun addCalendarYear(year : Int)  {
+        fun addCalendarYear(year: Int) {
             calendar.add(Calendar.YEAR, year)
         }
 
-        fun setCalendarMonth(month : Int)  {
+        fun setCalendarMonth(month: Int) {
             calendar.set(Calendar.MONTH, month)
         }
 
-        fun addCalendarMonth(month : Int)  {
+        fun addCalendarMonth(month: Int) {
             calendar.add(Calendar.MONTH, month)
         }
 
-        fun setCalendarDay(day : Int) {
+        fun setCalendarDay(day: Int) {
             calendar.set(Calendar.DAY_OF_YEAR, day)
         }
 
-        fun addCalendarDay(day : Int) {
+        fun addCalendarDay(day: Int) {
             calendar.add(Calendar.DAY_OF_YEAR, day)
         }
 
-        fun setCalendarHour(hour : Int) {
+        fun setCalendarHour(hour: Int) {
             calendar.set(Calendar.HOUR_OF_DAY, hour)
         }
 
-        fun addCalendarHour(hour : Int) {
+        fun addCalendarHour(hour: Int) {
             calendar.add(Calendar.HOUR_OF_DAY, hour)
         }
 
-        fun setCalendarMinute(minute : Int) {
+        fun setCalendarMinute(minute: Int) {
             calendar.set(Calendar.MINUTE, minute)
         }
 
-        fun addCalendarMinute(minute : Int) {
+        fun addCalendarMinute(minute: Int) {
             calendar.add(Calendar.MINUTE, minute)
         }
 
-        fun setCalendarSecond(second : Int) {
+        fun setCalendarSecond(second: Int) {
             calendar.set(Calendar.SECOND, second)
         }
 
-        fun addCalendarSecond(second : Int) {
+        fun addCalendarSecond(second: Int) {
             calendar.add(Calendar.SECOND, second)
         }
 
-        fun getDate(timeInMillis : Long) : Date {
+        fun getDate(timeInMillis: Long): Date {
             return Date(timeInMillis)
         }
 
-        fun getCustomDate() : Date {
+        fun getCustomDate(): Date {
             return Date(calendar.timeInMillis)
         }
 
-        fun getDateTime() : String {
+        fun getDateTime(): String {
             if (!::dateFormat.isInitialized) {
                 dateFormat = DEFAULT_DATE_FORMAT
             }
@@ -91,14 +91,14 @@ class TimeUtils {
             return getDateTime(dateFormat, dateLocale)
         }
 
-        fun getDateTime(format : String, locale : Locale) : String {
+        fun getDateTime(format: String, locale: Locale): String {
             val calendar = Calendar.getInstance()
             val date = calendar.time
 
             return SimpleDateFormat(format, locale).format(date)
         }
 
-        fun getDateTimeWithTimeZone() : String {
+        fun getDateTimeWithTimeZone(): String {
             if (!::dateFormat.isInitialized) {
                 dateFormat = DEFAULT_TIMEZONE_DATE_FORMAT
             }
@@ -114,7 +114,7 @@ class TimeUtils {
             return getDateTimeWithTimeZone(dateFormat, dateLocale, dateTimezone)
         }
 
-        fun getDateTimeWithTimeZone(format : String, locale : Locale, timezone : TimeZone) : String {
+        fun getDateTimeWithTimeZone(format: String, locale: Locale, timezone: TimeZone): String {
             val calendar = Calendar.getInstance()
             val date = calendar.time
 
@@ -125,11 +125,11 @@ class TimeUtils {
             return sdf.format(date)
         }
 
-        fun isBefore(date1 : Date, date2 : Date) : Boolean{
+        fun isBefore(date1: Date, date2: Date): Boolean {
             return date1.before(date2)
         }
 
-        fun isBefore(timeInMillis1: Long, timeInMillis2: Long) : Boolean{
+        fun isBefore(timeInMillis1: Long, timeInMillis2: Long): Boolean {
             val date1 = getDate(timeInMillis1)
             val date2 = getDate(timeInMillis2)
             return date1.before(date2)
