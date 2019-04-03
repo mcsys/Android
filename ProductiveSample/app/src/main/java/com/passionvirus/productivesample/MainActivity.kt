@@ -6,6 +6,7 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
@@ -109,12 +110,12 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver(receiver)
     }
 
-    fun onButtonClicked() {
+    fun onButtonClicked(v: View) {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
-    fun onButtonClicked2() {
+    fun onButtonClicked2(v: View) {
         val intent = Intent(CUSTOM_ACTION)
         sendBroadcast(intent)
     }
