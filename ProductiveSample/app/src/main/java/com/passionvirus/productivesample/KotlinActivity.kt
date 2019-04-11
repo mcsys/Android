@@ -12,7 +12,6 @@ class KotlinActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin)
 
         /*
         val numbers= listOf(1 ,2, 3, 4, 5, 6)
