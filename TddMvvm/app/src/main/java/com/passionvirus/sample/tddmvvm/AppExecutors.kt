@@ -1,4 +1,4 @@
-package com.passionvirus.sample.sample.tddmvvm
+package com.passionvirus.sample.tddmvvm
 
 import android.os.Handler
 import android.os.Looper
@@ -14,7 +14,8 @@ class AppExecutors {
     init {
         appExecutors(Executors.newSingleThreadExecutor(),
             Executors.newFixedThreadPool(3),
-            MainThreadExecutor())
+            MainThreadExecutor()
+        )
     }
 
     private fun appExecutors(diskIO: Executor, networkIO: Executor, mainThread: Executor) {

@@ -1,4 +1,4 @@
-package com.passionvirus.sample.sample.tddmvvm
+package com.passionvirus.sample.tddmvvm
 
 import org.junit.Test
 

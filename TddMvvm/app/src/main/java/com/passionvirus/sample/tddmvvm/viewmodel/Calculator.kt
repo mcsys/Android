@@ -1,4 +1,4 @@
-package com.passionvirus.sample.sample.tddmvvm.viewmodel
+package com.passionvirus.sample.tddmvvm.viewmodel
 
 class Calculator {
     fun add(a: Int, b: Int): Int {

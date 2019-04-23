@@ -1,4 +1,4 @@
-package com.passionvirus.sample.sample.tddmvvm.api
+package com.passionvirus.sample.tddmvvm.api
 
 import com.google.gson.JsonObject
 import retrofit2.Call

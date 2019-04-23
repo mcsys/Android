@@ -1,6 +1,6 @@
-package com.passionvirus.sample.sample.tddmvvm
+package com.passionvirus.sample.tddmvvm
 
-import com.passionvirus.sample.sample.tddmvvm.viewmodel.Calculator
+import com.passionvirus.sample.tddmvvm.viewmodel.Calculator
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

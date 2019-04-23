@@ -9,18 +9,23 @@ android {
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId "com.passionvirus.sample.sample.tddmvvm"
+        applicationId "com.passionvirus.sample.tddmvvm"
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -28,8 +33,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.android.support:appcompat-v7:$rootProject.support_library_version"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraint_layout_version"
+    implementation "androidx.appcompat:appcompat:$rootProject.androidx_library_version"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout_version"
 
     // retrofit
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
