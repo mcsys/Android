@@ -4,17 +4,14 @@ buildscript {
     ext {
         gradle_version = '3.4.0'
         google_service_version = '4.2.0'
-        kotlin_version = '1.3.30'
+        kotlin_version = '1.3.31'
 
-//        lifecycle_version = '1.1.1'
-//        room_version = '1.1.1'
-//        work_version = '1.0.1'
-//        ktx_version = '0.3'
+        databinding_compiler_version = '3.4.0'
 
         support_library_version = '28.0.0'
         androidx_library_version = '1.1.0-alpha04'
         constraint_layout_version = '1.1.3'
-        crashlytics_version = '2.9.9'
+        //crashlytics_version = '2.9.9'
         // For AndroidX
         /*
         appcompatVersion = '1.0.2'
@@ -23,13 +20,17 @@ buildscript {
         recyclerviewVersion = '1.0.0'
         cardviewVersion = '1.0.0'
         */
+        room_version = "2.1.0-alpha07"
+
+
+        gson_version = '2.8.2'
+        retrofit_version = '2.4.0'
+        glide_version = '4.8.0'
+
         rxjava_version = '2.2.0'
         rxkotlin_version = '2.3.0'
 
 //        exoplayer_version = '2.7.3'
-        gson_version = '2.8.2'
-        retrofit_version = '2.4.0'
-        glide_version = '4.8.0'
 
         junit_version = '4.12'
         runner_version = '1.0.2'
