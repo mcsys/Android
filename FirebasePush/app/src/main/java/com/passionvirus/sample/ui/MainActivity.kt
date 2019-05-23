@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Analytics.getInstance(this).init(application)
+        Analytics.getInstance(this).sendLog()
+
         if (intent.extras != null) {
             for (key in intent.extras!!.keySet()) {
                 val value = intent.extras!!.get(key)
