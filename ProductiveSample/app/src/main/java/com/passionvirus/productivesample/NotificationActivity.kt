@@ -23,6 +23,8 @@ class NotificationActivity: AppCompatActivity() {
 
     private fun sendMyNotification(message: String) {
 
+        val channelId = "notification_channel_id"
+        val channelName = "notification_channel_name"
         val intent = Intent(this, Notification::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
@@ -34,7 +36,7 @@ class NotificationActivity: AppCompatActivity() {
                     R.raw.push_sound
         )
 
-        val notificationBuilder = NotificationCompat.Builder(this, "CH_ID")
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setAutoCancel(true)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(getString(R.string.app_name))
@@ -56,7 +58,7 @@ class NotificationActivity: AppCompatActivity() {
 
                 // Creating Channel
                 val notificationChannel =
-                    NotificationChannel("CH_ID", "Testing_Audio", NotificationManager.IMPORTANCE_HIGH)
+                    NotificationChannel(channelId, channelIdName, NotificationManager.IMPORTANCE_HIGH)
                 notificationChannel.setSound(soundUri, audioAttributes)
                 mNotificationManager.createNotificationChannel(notificationChannel)
             }
