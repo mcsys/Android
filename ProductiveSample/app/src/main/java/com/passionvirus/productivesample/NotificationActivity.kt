@@ -11,6 +11,7 @@ import android.app.PendingIntent
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 
 
@@ -22,7 +23,7 @@ class NotificationActivity: AppCompatActivity() {
     }
 
     private fun sendMyNotification(message: String) {
-
+        val notificationImage = BitmapFactory.decodeResource(resources, R.mipmap.noti_sample)
         val channelId = "notification_channel_id"
         val channelName = "notification_channel_name"
         val intent = Intent(this, Notification::class.java)
@@ -41,7 +42,9 @@ class NotificationActivity: AppCompatActivity() {
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(message)
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(notificationImage).setBigContentTitle(getString(R.string.app_name)).setSummaryText(message))
             .setSound(soundUri)
+            .setTicker(message)
             .setContentIntent(pendingIntent)
 
         val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -58,7 +61,7 @@ class NotificationActivity: AppCompatActivity() {
 
                 // Creating Channel
                 val notificationChannel =
-                    NotificationChannel(channelId, channelIdName, NotificationManager.IMPORTANCE_HIGH)
+                    NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
                 notificationChannel.setSound(soundUri, audioAttributes)
                 mNotificationManager.createNotificationChannel(notificationChannel)
             }
