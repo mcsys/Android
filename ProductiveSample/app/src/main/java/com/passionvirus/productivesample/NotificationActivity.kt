@@ -1,18 +1,18 @@
 package com.passionvirus.productivesample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.NotificationChannel
 import android.media.AudioAttributes
-import android.support.v4.app.NotificationCompat
 import android.app.PendingIntent
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 
 
 class NotificationActivity: AppCompatActivity() {

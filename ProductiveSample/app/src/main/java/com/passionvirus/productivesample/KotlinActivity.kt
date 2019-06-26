@@ -1,11 +1,11 @@
 package com.passionvirus.productivesample
 
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.util.Log
 import android.util.Range
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 
 class KotlinActivity : AppCompatActivity() {
 
