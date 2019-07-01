@@ -12,12 +12,30 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import java.lang.Exception
+import java.util.concurrent.TimeUnit
+
+
 
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 class BluetoothActivity : AppCompatActivity() {
+    val TAG = BluetoothActivity::class.java.simpleName
+
+    private var tryCount = 1
+    private val CHECK_COUNT = 3
+    private val DEVICE_FILTER_BY_NAME = true
+//    private val DEVICE_NAME = "PINKFONG_TRAIN"
+    private val DEVICE_NAME = "raspberrypi"
+    private val REQUEST_ENABLE_BT = 10001
+    private val UUID = java.util.UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+    private val BYTE_BUFFER = 1024
+    private val BYTE_ARRAY = ByteArray(BYTE_BUFFER)
 
     private val bluetoothAdapter by lazy {
         (getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager).adapter
@@ -27,11 +45,12 @@ class BluetoothActivity : AppCompatActivity() {
         when (DEVICE_FILTER_BY_NAME) {
             true -> bluetoothAdapter.bondedDevices
                 .filter {
-                        device -> device.name.equals(DEVICE_NAME, true)
+                        device ->
+                    device.name.equals(DEVICE_NAME, true)
                 }
-                .filter {
-                        device -> device.bondState == BOND_BONDED// || device.bondState == BOND_BONDING
-                }
+//                .filter {
+//                        device -> device.bondState == BOND_BONDED// || device.bondState == BOND_BONDING
+//                }
 
             false -> bluetoothAdapter.bondedDevices
                 .filter {
@@ -45,32 +64,51 @@ class BluetoothActivity : AppCompatActivity() {
     }
 
     private val bluetoothSocket by lazy {
-        val uuid = java.util.UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-//        val uuid = java.util.UUID.fromString("00000000-0000-1000-8000-00805F9B34FB")
-
-        pairedDevice.createRfcommSocketToServiceRecord(uuid)
+        BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
+        pairedDevice.createInsecureRfcommSocketToServiceRecord(UUID).apply {
+            connect()
+        }
     }
 
     private val bluetoothOutputStream by lazy {
-        bluetoothSocket.outputStream
+        bluetoothSocket.let {
+            bluetoothSocket.outputStream
+        }
     }
 
     private val bluetoothInputStream by lazy {
-        bluetoothSocket.inputStream
+        bluetoothSocket.let {
+            bluetoothSocket.inputStream
+        }
     }
 
-    private var tryCount = 1
-    private val CHECK_COUNT = 3
-    private val DEVICE_FILTER_BY_NAME = true
-//    private val DEVICE_NAME = "PINKFONG_TRAIN"
-    private val DEVICE_NAME = "PaMu Scroll"
-    private val REQUEST_ENABLE_BT = 10001
+    private val subscribeReceiver by lazy {
+        Observable.interval(3000, 1000, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe { receiveData() }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth)
 
         initBluetooth()
+
+        Log.d(TAG, "Ready To Send")
+        Observable.timer(2000, TimeUnit.MILLISECONDS)
+            .observeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())
+            .subscribe{ sendData("go") }
+
+        /*
+        Runnable {
+            Thread.sleep(1000)
+            try {
+                sendData("TEST")
+            } catch (e: Exception){ Log.d("TEST1234", "E: $e") }
+        }.run()
+        */
     }
 
     private fun initBluetooth() {
@@ -101,8 +139,8 @@ class BluetoothActivity : AppCompatActivity() {
 
     private fun checkBondedDevices() {
         // Use lazy
-        /*
-        pairedDevices = when (DEVICE_FILTER_BY_NAME) {
+        Log.d(TAG, "checkBondedDevices")
+        val pairedDevices = when (DEVICE_FILTER_BY_NAME) {
             true -> bluetoothAdapter.bondedDevices
                 .filter {
                     device -> device.name.equals(DEVICE_NAME, true)
@@ -116,15 +154,46 @@ class BluetoothActivity : AppCompatActivity() {
                         device -> device.bondState == BOND_BONDED// || device.bondState == BOND_BONDING
                 }
         }
-        */
+
+        if(pairedDevices.isNotEmpty()) {
+           Log.d(TAG, "Ok has list")
+        }
+        else {
+            Log.d(TAG, "Need Pair")
+            // 페어링 가능한 장치가 없습니다.
+        }
     }
 
     private fun sendData(data: String) {
-        bluetoothOutputStream.write(data.toByteArray())
+        Log.d(TAG, "send! :  $data")
+        try {
+            if (bluetoothSocket.isConnected) {
+                bluetoothOutputStream.write(data.toByteArray())
+            } else {
+                // Stop Send & close
+                Log.d(TAG, "Closed 1")
+            }
+        }
+        catch (e: Exception) {
+            Log.d(TAG, "E: ${e.message}")
+            // Stop Send
+        }
     }
 
-    private fun sendData(data: ByteArray) {
-        bluetoothOutputStream.write(data)
+//    private fun sendData(data: ByteArray) {
+//        bluetoothOutputStream.write(data)
+//    }
+
+    private fun receiveData() {
+        Log.d(TAG, "Read : receiveData")
+        try {
+            val bytes = bluetoothInputStream.read(BYTE_ARRAY)
+            val message = String(BYTE_ARRAY, 0, bytes)
+            Log.d(TAG, "Read : $message")
+        } catch (e: Exception) {
+            Log.d(TAG, "E: ${e.message}")
+            // Stop Receive
+        }
     }
 
     private val mReceiver = object : BroadcastReceiver() {
@@ -143,14 +212,22 @@ class BluetoothActivity : AppCompatActivity() {
     }
 
     private fun registerReceiver() {
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        filter.run {
-            registerReceiver(mReceiver, this)
-        }
+        IntentFilter()
+            .apply {
+                addAction(BluetoothDevice.ACTION_FOUND)
+            }
+            .run {
+                registerReceiver(mReceiver, this)
+            }
+
+        subscribeReceiver
     }
 
     private fun unregisterReceiver() {
         unregisterReceiver(mReceiver)
+
+        if(!subscribeReceiver.isDisposed)
+            subscribeReceiver.dispose()
     }
 
     override fun onResume() {
