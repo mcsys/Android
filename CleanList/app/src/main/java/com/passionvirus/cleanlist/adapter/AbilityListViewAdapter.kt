@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.passionvirus.cleanlist.databinding.AbilitylistItemBinding
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 
 class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     private val mItems = ArrayList<AbilityListViewItem>()
@@ -22,7 +24,8 @@ class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     override fun onBindViewHolder(holder: AbilityListViewHolder, position: Int) {
         val item = mItems[position]
         holder.bind(item)
-        holder.getClickObserver(item).subscribe(mPublishSubject)
+        holder.getClickObserver(item)
+            .subscribe(mPublishSubject)
     }
 
     fun updateItems(items: ArrayList<AbilityListViewItem>) {

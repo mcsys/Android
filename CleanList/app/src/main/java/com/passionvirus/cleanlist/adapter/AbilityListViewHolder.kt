@@ -1,5 +1,6 @@
 package com.passionvirus.cleanlist.adapter
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.passionvirus.cleanlist.BR
 import com.passionvirus.cleanlist.databinding.AbilitylistItemBinding
@@ -12,8 +13,10 @@ class AbilityListViewHolder(private val binding: AbilitylistItemBinding) : Recyc
     }
 
     fun getClickObserver(item : AbilityListViewItem) : Observable<AbilityListViewItem> {
-        return Observable.create { e -> itemView.setOnClickListener {
+        return Observable.create {
+                e -> itemView.setOnClickListener {
             e.onNext(item)
-        } }
+        }
+        }
     }
 }
