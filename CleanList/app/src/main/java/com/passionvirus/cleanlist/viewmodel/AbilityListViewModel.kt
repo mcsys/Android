@@ -8,6 +8,9 @@ import com.google.gson.JsonObject
 import com.passionvirus.cleanlist.adapter.AbilityListViewItem
 import com.passionvirus.cleanlist.api.ApiUtils
 import com.passionvirus.cleanlist.api.entity.ApiEntity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +36,8 @@ class AbilityListViewModel {
     var prevUrl = ""
     var nextUrl = ""
 
+    private var compositeDisposable = CompositeDisposable()
+
     init {
         getAbilityList()
     }
@@ -44,6 +49,8 @@ class AbilityListViewModel {
     fun getAbilityList(url : String) {
         Log.d("TEST1234", "req - getAbilityList")
         if (tryCount < RETRY_COUNT) {
+            // Code - V1
+            /*
             // Get List Info - Observable
             // If success then change button status and lastPage
             ApiUtils.getSOService().getAbilityList(url).enqueue(object : Callback<JsonObject> {
@@ -92,10 +99,47 @@ class AbilityListViewModel {
                     }
                 }
             })
+            */
+
+            // Code - V2 - RxKotlin
+            // https://poqw.github.io/RxJava2_3/
+            val reqList = ApiUtils
+                .getSOService()
+                .getAbilityList(url)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{ response -> updateData(response) }
+
+            compositeDisposable.add(reqList)
+
         }
         else {
             tryCount = 1
             refreshVisible.set(true)
+        }
+    }
+
+    fun updateData(response: JsonObject) {
+        response.let {
+            val loginResult = gson.fromJson(response.toString(), ApiEntity.AbilityList::class.java)
+
+            items.takeIf { it.size > 0 }
+                .run {
+                    items.clear()
+                }
+            items.addAll(loginResult.results)
+
+            loginResult.previous?.let {
+                prevUrl = loginResult.previous
+            } ?: run {
+                prevUrl = ""
+            }
+
+            loginResult.next?.let {
+                nextUrl = loginResult.next
+            } ?: run {
+                nextUrl = ""
+            }
         }
     }
 
@@ -152,6 +196,14 @@ class AbilityListViewModel {
             .filter { nextUrl.isNotEmpty() }
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe{ getAbilityList(nextUrl) }
+    }
+    */
+
+    /*
+    fun onClear() {
+        compositeDisposable
+            .takeUnless { it.isDisposed }
+            ?.apply { dispose() }
     }
     */
 }
