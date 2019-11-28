@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/dashboard"
+            android:icon="@mipmap/dashboard"
+            android:title="dashboard"/>
+
+    <item
+            android:id="@+id/home_list"
+            android:icon="@mipmap/home"
+            android:title="home"/>
+
+    <item
+            android:id="@+id/mypageFragment"
+            android:icon="@mipmap/emoticon"
+            android:title="mypage"/>
+
+</menu>

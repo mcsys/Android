@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nav"
+        app:startDestination="@id/one">
+
+    <fragment
+            android:id="@+id/one"
+            android:name="com.passionvirus.productivesample.OneFragment"
+            android:label="Blank"
+            tools:layout="@layout/fragment_one" >
+
+        <action
+                android:id="@+id/action_one_to_two"
+                app:destination="@id/two" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/two"
+            android:name="com.passionvirus.productivesample.TwoFragment"
+            android:label="Blank"
+            tools:layout="@layout/fragment_two" >
+        <action
+                android:id="@+id/action_two_to_one"
+                app:destination="@id/one" />
+    </fragment>
+
+</navigation>
