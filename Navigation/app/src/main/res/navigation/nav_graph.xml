@@ -12,14 +12,12 @@
         android:name="com.passionvirus.navigation.StepOneFragment"
         android:label="fragment_step_one"
         tools:layout="@layout/fragment_step_one" >
-        <!--
         <action
             android:id="@+id/action_stepOneFragment_to_startFragment"
             app:destination="@id/startFragment" />
         <action
             android:id="@+id/action_stepOneFragment_to_stepTwoFragment"
             app:destination="@id/stepTwoFragment" />
-        -->
     </fragment>
 
     <fragment
@@ -27,14 +25,12 @@
         android:name="com.passionvirus.navigation.StepTwoFragment"
         android:label="fragment_step_two"
         tools:layout="@layout/fragment_step_two" >
-        <!--
         <action
             android:id="@+id/action_stepTwoFragment_to_startFragment"
             app:destination="@id/startFragment" />
         <action
             android:id="@+id/action_stepTwoFragment_to_stepOneFragment"
             app:destination="@id/stepOneFragment" />
-        -->
     </fragment>
     <fragment
         android:id="@+id/startFragment"

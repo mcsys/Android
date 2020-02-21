@@ -38,7 +38,6 @@ class StepOneFragment : Fragment() {
         val buttonStart = v.findViewById<Button>(R.id.navigate_action_button_to_start)
         val buttonTwo = v.findViewById<Button>(R.id.navigate_action_button_to_two)
 
-        /*
         buttonStart.setOnClickListener {
             Log.d("TEST1234", "Click Start:FromOne")
             findNavController(v).navigate(R.id.action_stepOneFragment_to_startFragment)
@@ -48,7 +47,6 @@ class StepOneFragment : Fragment() {
             Log.d("TEST1234", "Click One:FromOne")
             findNavController(v).navigate(R.id.action_stepOneFragment_to_stepTwoFragment)
         }
-        */
 
 
         return v
