@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment" >
+
+
+
+    <fragment
+        android:id="@+id/stepOneFragment"
+        android:name="com.passionvirus.navigation.StepOneFragment"
+        android:label="fragment_step_one"
+        tools:layout="@layout/fragment_step_one" >
+        <!--
+        <action
+            android:id="@+id/action_stepOneFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_stepOneFragment_to_stepTwoFragment"
+            app:destination="@id/stepTwoFragment" />
+        -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/stepTwoFragment"
+        android:name="com.passionvirus.navigation.StepTwoFragment"
+        android:label="fragment_step_two"
+        tools:layout="@layout/fragment_step_two" >
+        <!--
+        <action
+            android:id="@+id/action_stepTwoFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_stepTwoFragment_to_stepOneFragment"
+            app:destination="@id/stepOneFragment" />
+        -->
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.passionvirus.navigation.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_stepOneFragment"
+            app:destination="@id/stepOneFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_stepTwoFragment"
+            app:destination="@id/stepTwoFragment" />
+    </fragment>
+</navigation>
