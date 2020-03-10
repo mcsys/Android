@@ -1,5 +1,6 @@
 package com.passionvirus.cleanlist.viewmodel
 
+
 import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
@@ -20,11 +21,11 @@ class AbilityListViewModel {
     private val TAG = AbilityListViewModel::class.java.simpleName
     companion object {
         private const val RETRY_COUNT = 3
-        private var abilityListUrl = "https://pokeapi.co/api/v2/ability/"
+        private const val abilityListUrl = "https://pokeapi.co/api/v2/ability/"
         private var tryCount = 1
     }
 
-    val gson = Gson()
+    private val gson = Gson()
     var refreshVisible = ObservableBoolean(false)
     // Code - V1
 //    var prevEnabled = ObservableBoolean(false)
@@ -47,7 +48,6 @@ class AbilityListViewModel {
     }
 
     fun getAbilityList(url : String) {
-        Log.d("TEST1234", "req - getAbilityList")
         if (tryCount < RETRY_COUNT) {
             // Code - V1
             /*
@@ -121,22 +121,22 @@ class AbilityListViewModel {
 
     fun updateData(response: JsonObject) {
         response.let {
-            val loginResult = gson.fromJson(response.toString(), ApiEntity.AbilityList::class.java)
+            val result = gson.fromJson(response.toString(), ApiEntity.AbilityList::class.java)
 
             items.takeIf { it.size > 0 }
                 .run {
                     items.clear()
                 }
-            items.addAll(loginResult.results)
+            items.addAll(result.results)
 
-            loginResult.previous?.let {
-                prevUrl = loginResult.previous
+            result.previous?.let {
+                prevUrl = result.previous
             } ?: run {
                 prevUrl = ""
             }
 
-            loginResult.next?.let {
-                nextUrl = loginResult.next
+            result.next?.let {
+                nextUrl = result.next
             } ?: run {
                 nextUrl = ""
             }

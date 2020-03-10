@@ -9,8 +9,8 @@ import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
-    private val mItems = ArrayList<AbilityListViewItem>()
-    private var mPublishSubject = PublishSubject.create<AbilityListViewItem>()
+    private val items = ArrayList<AbilityListViewItem>()
+    private var publishSubject = PublishSubject.create<AbilityListViewItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbilityListViewHolder {
         val binding = AbilitylistItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,23 +18,26 @@ class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return mItems.size
+        return items.size
     }
 
     override fun onBindViewHolder(holder: AbilityListViewHolder, position: Int) {
-        val item = mItems[position]
+        val item = items[position]
         holder.bind(item)
         holder.getClickObserver(item)
-            .subscribe(mPublishSubject)
+            .subscribe(publishSubject)
     }
 
-    fun updateItems(items: ArrayList<AbilityListViewItem>) {
-        mItems.takeIf { it.size > 0 }
-            .run { mItems.clear() }
-        mItems.addAll(items)
+    fun updateItems(newItem: ArrayList<AbilityListViewItem>) {
+        newItem.takeIf { it.size > 0 }
+            .run {
+                if (items != this)
+                items.clear()
+            }
+        items.addAll(newItem)
     }
 
     fun getItemPublishSubject() : PublishSubject<AbilityListViewItem> {
-        return mPublishSubject
+        return publishSubject
     }
 }

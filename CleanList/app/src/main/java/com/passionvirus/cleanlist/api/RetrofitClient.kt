@@ -1,6 +1,5 @@
 package com.passionvirus.cleanlist.api
 
-import android.util.Log
 import com.google.gson.*
 import com.passionvirus.cleanlist.api.entity.ApiEntity
 import retrofit2.Retrofit
@@ -40,9 +39,7 @@ class RetrofitClient {
     private class AbilityListDeserializer : JsonDeserializer<ApiEntity.AbilityList> {
         //@Throws(JsonParseException::class)
         override fun deserialize(json: JsonElement?, type: Type?, context: JsonDeserializationContext?): ApiEntity.AbilityList {
-            val entity = ApiEntity.AbilityList()
-
-            return entity
+            return ApiEntity.AbilityList()
         }
     }
 }

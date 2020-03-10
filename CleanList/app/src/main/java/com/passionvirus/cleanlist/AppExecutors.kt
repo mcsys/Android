@@ -9,9 +9,9 @@ import java.util.concurrent.Executors
 class AppExecutors {
 
     companion object {
-        private lateinit var mDiskIO : Executor
-        private lateinit var mNetworkIO : Executor
-        private lateinit var mMainThread : Executor
+        private lateinit var diskIO : Executor
+        private lateinit var networkIO : Executor
+        private lateinit var mainThread : Executor
 
         private class MainThreadExecutor : Executor {
             private val mainThreadHandler = Handler(Looper.getMainLooper())
@@ -21,27 +21,27 @@ class AppExecutors {
         }
     }
 
-    private fun AppExecutors(diskIO : Executor, networkIO : Executor, mainThread : Executor) {
-        mDiskIO = diskIO
-        mNetworkIO = networkIO
-        mMainThread = mainThread
+    private fun appExecutors(diskIOExecutor : Executor, networkIOExecutor : Executor, mainThreadExecutor : Executor) {
+        diskIO = diskIOExecutor
+        networkIO = networkIOExecutor
+        mainThread = mainThreadExecutor
     }
 
     fun AppExecutors() {
-        AppExecutors(
+        appExecutors(
             Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
             MainThreadExecutor())
     }
 
     fun diskIO() : Executor {
-        return mDiskIO
+        return diskIO
     }
 
     fun networkIO() : Executor {
-        return mNetworkIO
+        return networkIO
     }
 
     fun mainThread() : Executor{
-        return mMainThread
+        return mainThread
     }
 }

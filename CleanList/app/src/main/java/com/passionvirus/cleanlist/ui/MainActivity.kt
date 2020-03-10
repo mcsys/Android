@@ -22,9 +22,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun moveAbility(name : String, url : String) {
+        // Todo
+        /*
         val abi = Ability(name, url)
         val bundle = Bundle()
-        bundle.putParcelable("ability", abi)
+        bundle.putParcelable(Ability.name, abi)
 //        bundle.putString("name", name)
 //        bundle.putString("url", url)
 
@@ -34,5 +36,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment, AbilityFragment().TAG)
             .commit()
+        */
     }
 }

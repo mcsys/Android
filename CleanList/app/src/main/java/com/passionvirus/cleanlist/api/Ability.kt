@@ -7,6 +7,8 @@ import android.os.Parcelable
 data class Ability(val name: String, val url: String) : Parcelable {
 
     companion object {
+        const val name = "ability"
+
         @JvmField
         val CREATOR = object : Parcelable.Creator<Ability> {
             override fun createFromParcel(parcel: Parcel) = Ability(parcel)

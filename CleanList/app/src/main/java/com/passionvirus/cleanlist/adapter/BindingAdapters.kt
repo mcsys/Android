@@ -1,5 +1,6 @@
 package com.passionvirus.cleanlist.adapter
 
+import android.util.Log
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +11,10 @@ object BindingAdapters {
         val adapter = recyclerView.adapter as AbilityListViewAdapter
 
         items.let {
-            adapter.updateItems(items)
-            adapter.notifyDataSetChanged()
+            if (it.size > 0) {
+                adapter.updateItems(items)
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 

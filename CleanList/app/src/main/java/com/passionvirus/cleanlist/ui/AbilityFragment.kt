@@ -21,8 +21,8 @@ class AbilityFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        name = arguments?.getParcelable<Ability>("ability")?.name ?: ""
-        url = arguments?.getParcelable<Ability>("ability")?.url ?: ""
+        name = arguments?.getParcelable<Ability>(Ability.name)?.name ?: ""
+        url = arguments?.getParcelable<Ability>(Ability.name)?.url ?: ""
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

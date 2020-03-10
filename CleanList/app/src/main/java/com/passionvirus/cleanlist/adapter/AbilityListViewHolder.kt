@@ -1,6 +1,5 @@
 package com.passionvirus.cleanlist.adapter
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.passionvirus.cleanlist.BR
 import com.passionvirus.cleanlist.databinding.AbilitylistItemBinding
