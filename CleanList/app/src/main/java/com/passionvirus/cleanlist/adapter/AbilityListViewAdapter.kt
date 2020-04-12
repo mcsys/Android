@@ -1,12 +1,13 @@
 package com.passionvirus.cleanlist.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.passionvirus.cleanlist.databinding.AbilitylistItemBinding
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
+
 
 class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     private val items = ArrayList<AbilityListViewItem>()
@@ -29,6 +30,16 @@ class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
     }
 
     fun updateItems(newItem: ArrayList<AbilityListViewItem>) {
+        val diffCallback = AbilityListDiffCallback(items, newItem)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        items.clear()
+        items.addAll(newItem)
+
+        diffResult.dispatchUpdatesTo(this)
+    }
+    /*
+    fun updateItems(newItem: ArrayList<AbilityListViewItem>) {
         newItem.takeIf { it.size > 0 }
             .run {
                 if (items != this)
@@ -36,6 +47,7 @@ class AbilityListViewAdapter : RecyclerView.Adapter<AbilityListViewHolder>() {
             }
         items.addAll(newItem)
     }
+    */
 
     fun getItemPublishSubject() : PublishSubject<AbilityListViewItem> {
         return publishSubject

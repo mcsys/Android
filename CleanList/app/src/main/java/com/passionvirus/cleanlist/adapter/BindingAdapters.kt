@@ -13,7 +13,7 @@ object BindingAdapters {
         items.let {
             if (it.size > 0) {
                 adapter.updateItems(items)
-                adapter.notifyDataSetChanged()
+//                adapter.notifyDataSetChanged()
             }
         }
     }
