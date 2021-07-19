@@ -48,14 +48,7 @@ class Processor : SymbolProcessor {
 
             for (property in classDeclaration.getDeclaredProperties()) {
                 for (annotation in property.annotations) {
-                    if (annotation.shortName.getShortName() == Param::class.java.simpleName
-                        || annotation.shortName.getShortName() == EventBoolean::class.java.simpleName
-                        || annotation.shortName.getShortName() == EventDouble::class.java.simpleName
-                        || annotation.shortName.getShortName() == EventFloat::class.java.simpleName
-                        || annotation.shortName.getShortName() == EventInt::class.java.simpleName
-                        || annotation.shortName.getShortName() == EventLong::class.java.simpleName
-                        || annotation.shortName.getShortName() == EventString::class.java.simpleName
-                    ) {
+                    if (annotation.shortName.getShortName() == Param::class.java.simpleName) {
                         candidates.add(property)
                         break
                     }
@@ -68,13 +61,13 @@ class Processor : SymbolProcessor {
             for (candidate in candidates) {
                 logger.warn("@Event -> ${candidate.simpleName.asString()}::${candidate.type} 발견")
                 buildFuncParam += if (candidate.simpleName.asString() == "name") {
-                    "${candidate.simpleName.asString()}${candidate.simpleName.hashCode()}: ${candidate.type.resolve()},\n\t"
+                    "${candidate.simpleName.asString()}${classDeclaration.simpleName.asString()}: ${candidate.type.resolve()},\n\t"
                 } else {
                     "${candidate.simpleName.asString()}: ${candidate.type.resolve()},\n\t"
                 }
 
                 buildEventParam += if (candidate.simpleName.asString() == "name") {
-                    "param(\"${candidate.simpleName.asString()}${candidate.simpleName.hashCode()}\", ${candidate.simpleName.asString()}${candidate.simpleName.hashCode()})\n\t"
+                    "param(\"${candidate.simpleName.asString()}${classDeclaration.simpleName.asString()}\", ${candidate.simpleName.asString()}${classDeclaration.simpleName.asString()})\n\t"
                 } else {
                     "param(\"${candidate.simpleName.asString()}\", ${candidate.simpleName.asString()})\n\t"
                 }
